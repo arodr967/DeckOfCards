@@ -9,6 +9,7 @@
 #define DeckOfCards_A3_h
 
 #include <stdio.h>
+#include <time.h>
 
 
 #define PLAYER_MAX 13 /* Maximum number of players */
