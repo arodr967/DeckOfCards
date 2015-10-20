@@ -16,29 +16,10 @@
 #include "DeckOfCards_A3.h"
 
 /* Main function which validates user input. */
-int void main()
+int main(int argc, char const *argv[])
 {
     int numberOfCards;	/* User input for the number of cards per player? */
-    int numberOfHands; 	/* User input for the number of hands/players. */
-    char buffer;
-    
-    do {
-        printf("\n");
-        printf("Please choose the number of players. (2-13 players)");
-        scanf("%d", &numberOfHands);
-        
-        printf("\n");
-        
-        if (numberOfHands >= MIN && numberOfHands <= LIMIT)
-        {
-            printf("Initializing %d players...", numberOfHands);
-            
-        } else {
-            printf("Your input is incorrect. Please try again. \n");
-            while((buffer = getchar()) != '\n' && buffer != EOF);
-        }
-        
-    } while ();
+    int numberOfPlayers; 	/* User input for the number of players. */
         
     return 0;
 }
