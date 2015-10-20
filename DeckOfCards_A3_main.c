@@ -18,8 +18,16 @@
 /* Main function which validates user input. */
 int main(int argc, char const *argv[])
 {
-    int numberOfCards;	/* User input for the number of cards per player? */
-    int numberOfPlayers; 	/* User input for the number of players. */
-        
+
+    if(argc == ARG_NUM)
+    {
+        printf("Initializing the game of cards...\n\n");
+    } else {
+        printf("Please begin to run the program with 2 arguments. \n");
+        printf("The first argument is the number of players, and the \n");
+        printf("second is the number of cards for each players.\n\n");
+    }
+    
+    
     return 0;
 }
