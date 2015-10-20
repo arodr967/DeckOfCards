@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
 
     if(argc == ARG_NUM)
     {
-        printf("Initializing the game of cards...\n\n");
+        printf("Initializing the deck of cards...\n\n");
     } else {
         printf("Please begin to run the program with 2 arguments. \n");
         printf("The first argument is the number of players, and the \n");
@@ -31,3 +31,4 @@ int main(int argc, char const *argv[])
     
     return 0;
 }
+
