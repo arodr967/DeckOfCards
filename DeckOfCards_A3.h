@@ -9,8 +9,12 @@
 #define DeckOfCards_A3_h
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
+#define CARD_TOTAL 52
+#define NUMBER_OF_VALUES 13
+#define NUMBER_OF_SUITS 4
 
 #define PLAYER_MAX 13 /* Maximum number of players */
 #define PLAYER_MIN 2 /* Minumum number of players */
@@ -20,6 +24,10 @@
 
 #define ARG_NUM 3 /* Validating that the correct number of arguments passed */
 
+#define CARD_ACE 1
+#define CARD_JACK 11
+#define CARD_QUEEN 12
+#define CARD_KING 13
 
 /* Unix based codes for the suits */
 #define HEARTS "\xe2\x99\xa5"
@@ -27,6 +35,23 @@
 #define CLOVERS "\xe2\x99\xa7"
 #define DIAMONDS "\xe2\x99\xa6"
 
+/* Prototypes: */
 
+struct deck creatDeck();
+void suffle(struct deck *card);
+void displayHand();
+void sortHand(); /* Extra credit. */
+
+/* Structs: */
+
+struct card {
+    char *suit;
+    int number;
+    char specialCard;
+};
+
+struct deck {
+    struct card deckOfCards[CARD_TOTAL];
+};
 
 #endif /* DeckOfCards_A3_h */
