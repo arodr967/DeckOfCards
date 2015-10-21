@@ -35,11 +35,18 @@
 #define FALSE 0
 #define TRUE 1
 
-/* Unix based codes for the suits */
-#define HEARTS "\xe2\x99\xa5"
-#define SPADES "\xe2\x99\xa4"
-#define CLOVERS "\xe2\x99\xa7"
-#define DIAMONDS "\xe2\x99\xa6"
+/* Codes for the suits */
+#if defined(_WIN32) || defined(_MSDOS_)
+#define SPADE	"\x06"
+#define CLUB	"\x05"
+#define HEART	"\x03"
+#define DIAMOND	"\x04"
+#else
+#define SPADE	"\xe2\x99\xa4"
+#define CLUB	"\xe2\x99\xa7"
+#define HEART	"\xe2\x99\xa5"
+#define DIAMOND	"\xe2\x99\xa6"
+#endif
 
 /* Prototypes: */
 
