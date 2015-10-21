@@ -16,33 +16,60 @@
 #include "DeckOfCards_A3.h"
 
 /* Main function which validates user input. */
-int main(int argc, char const *argv[])
+int main(int argc, char *argv[])
 {
     struct deck gameOfCards, *point = &gameOfCards;
     
     //check for argc 2 and 3
     if(argc == ARG_NUM)
     {
+        if(validateInput(argv[1], argv[2]))
+        {
+            printf("Initializing the game of cards...\n\n");
+            printf("The following is the complete deck of cards: \n");
+            
+            gameOfCards = createDeck();
+            printDeck(point);
+        }
+        
         //if(argv [1]) //blahblah
         // enter to create the deck
-        printf("Initializing the game of cards...\n\n");
-        
-        printf("The following is the deck of cards: \n\n");
-        gameOfCards = createDeck();
-        printDeck(point);
-        
-        printf("Shuffling the deck...\n\n");
-        shuffle(point);
-        printDeck(point);
+//        printf("Initializing the game of cards...\n\n");
+//        
+//        printf("The following is the deck of cards: \n\n");
+//        gameOfCards = createDeck();
+//        printDeck(point);
+//        
+//        printf("Shuffling the deck...\n\n");
+//        shuffle(point);
+//        printDeck(point);
         
     } else {
         printf("Please begin to run the program with 2 arguments. \n");
-        printf("The first argument is the number of players, and the \n");
-        printf("second is the number of cards for each players.\n\n");
+        printf("The first argument is the number of cards for each player,\n");
+        printf("and the second is the number of cards.\n\n");
     }
     
-    
     return 0;
+}
+
+int validateInput(char *arg1, char *arg2)
+{
+    int numberOfCards = atoi(arg1);
+    int numberOfPlayers = atoi(arg2);
+    
+    int total = numberOfCards * numberOfPlayers;
+    
+    printf("Number of cards per player: %d and number of players: %d\n\n", numberOfCards, numberOfPlayers);
+    printf("The total number of cards is %d\n\n", total);
+    
+    if ((total > CARD_TOTAL) || (total == 0))
+    {
+        printf("There are only %d cards in total available. Please try again.\n\n", CARD_TOTAL);
+        return 0; //false: invalide input
+    } else {
+        return 1; //true: valide input
+    }
 }
 
 /* Deck method which creates a method and adds those values in the struct. */
@@ -54,9 +81,6 @@ struct deck createDeck()
     int forSuits, forNum, counter = 0;
     struct deck theDeck;
     
-    
-    /* Testing printing the cards */
-    printf("\n\nPrint the cards...\n\n");
     for (forSuits = 0; forSuits < NUMBER_OF_SUITS; ++forSuits)
     {
         for (forNum = 1; forNum <= NUMBER_OF_VALUES; ++forNum)
@@ -76,7 +100,6 @@ void printDeck(struct deck *point)
 {
     int forSuits, forNum, counter = 0;
     
-    printf("\n\nPrint the cards...\n\n");
     for (forSuits = 0; forSuits < NUMBER_OF_SUITS; ++forSuits)
     {
         for (forNum = 1; forNum <= NUMBER_OF_VALUES; ++forNum)
