@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     if(argc == ARG_NUM)     /* There will only be 3 accepted arguments in this 
                              deck of cards */
     {
-        if(validateInput(argv[1], argv[2])) /* If the validateInput function returns
+        if(validateInput(argv[INPUT_CARD], argv[INPUT_PLAYER])) /* If the validateInput function returns
                                                a 1 then the inputs were correct and the 
                                                game of cards can begin */
         {
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
             gameOfCards = createDeck();
             printDeck(point);
             
-            deal(argv[1], argv[2]);
+            deal(argv[INPUT_CARD], argv[INPUT_PLAYER]);
         }
         
         //if(argv [1]) //blahblah
