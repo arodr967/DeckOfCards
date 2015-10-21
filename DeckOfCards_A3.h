@@ -24,6 +24,7 @@
 
 #define ARG_NUM 3 /* Validating that the correct number of arguments passed */
 
+#define CARD_NUM 'N'
 #define CARD_ACE 1
 #define CARD_JACK 11
 #define CARD_QUEEN 12
@@ -37,10 +38,12 @@
 
 /* Prototypes: */
 
-struct deck creatDeck();
+struct deck createDeck();
 void suffle(struct deck *card);
 void displayHand();
 void sortHand(); /* Extra credit. */
+char isSpecialCard (int num);
+int getRandom(); /* Get a random number in order to shuffle the cards */
 
 /* Structs: */
 
@@ -48,6 +51,7 @@ struct card {
     char *suit;
     int number;
     char specialCard;
+    //int index;
 };
 
 struct deck {
