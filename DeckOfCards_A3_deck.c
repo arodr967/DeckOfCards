@@ -23,20 +23,20 @@ int validateInput(char *arg1, char *arg2)
     if (((total > CARD_TOTAL) || (total == 0)))
     {
         printf("There are only %d cards in total available. Please try again.\n\n", CARD_TOTAL);
-        return 0; //false: invalid input
+        return FALSE; //invalid input
     }
     else if ((numberOfPlayers < PLAYER_MIN) || (numberOfPlayers > PLAYER_MAX))
     {
         printf("There can only be a minimum of %d players and a maximum of %d players. Please try again.\n\n", PLAYER_MIN, PLAYER_MAX);
-        return 0; //false: invalid input
+        return FALSE; //invalid input
     }
     else if ((numberOfCards < CARD_MIN) || (numberOfCards > CARD_MAX))
     {
         printf("There can only be a minimum of %d card and a maximum of %d cards. Please try again.\n\n", CARD_MIN, CARD_MAX);
-        return 0; //false: invalid input
+        return FALSE; //invalid input
     } else {
         printf("Your input is valid.\n\n");
-        return 1; //true: valid input
+        return TRUE; //valid input
     }
 }
 
@@ -150,6 +150,7 @@ void deal(char *arg1, char *arg2)
     int i, j, currentCard = 0, currentPlayer = 1;
     //struct deck *players[numberOfPlayers];
     
+    /* To differentiate between one card and more than one card */
     if (numberOfCards > 1) {
         printf("\n\nReady to deal %d cards to %d players...\n\n", numberOfCards, numberOfPlayers);
     } else {
