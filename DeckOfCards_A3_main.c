@@ -18,13 +18,24 @@
 /* Main function which validates user input. */
 int main(int argc, char const *argv[])
 {
+    struct deck gameOfCards, *point = &gameOfCards;
+    
     //check for argc 2 and 3
-
     if(argc == ARG_NUM)
     {
         //if(argv [1]) //blahblah
         // enter to create the deck
-        createDeck();
+        printf("Initializing the game of cards...\n\n");
+        
+        printf("The following is the deck of cards: \n\n");
+        gameOfCards = createDeck();
+        printDeck(point);
+        
+        printf("Shuffling the deck...\n\n");
+        shuffle(point);
+        printDeck(point);
+        
+        
         
     } else {
         printf("Please begin to run the program with 2 arguments. \n");
@@ -42,9 +53,6 @@ struct deck createDeck()
     /* Create an array of char points to the suits. */
     char *suits[NUMBER_OF_SUITS] = {HEARTS, SPADES, CLOVERS, DIAMONDS};
     
-    //rows
-    //columns
-    
     int forSuits, forNum, counter = 0;
     char specialC;
     struct deck theDeck;
@@ -61,13 +69,13 @@ struct deck createDeck()
                 theDeck.deckOfCards[counter].specialCard = specialC;
                 theDeck.deckOfCards[counter].suit = suits[forSuits];
                 
-                printf("[%s %c]", suits[forSuits], specialC);
+                //printf("[%s %c]", suits[forSuits], specialC);
             } else {
                 
                 theDeck.deckOfCards[counter].number = forNum;
                 theDeck.deckOfCards[counter].suit = suits[forSuits];
                 
-                printf("[%s %d]", suits[forSuits], forNum);
+                //printf("[%s %d]", suits[forSuits], forNum);
             }
             
             counter++;
@@ -75,25 +83,52 @@ struct deck createDeck()
         printf("\n");
     }
     
-    counter = 0;
+//    counter = 0;
+//    
+//    printf("\n\nPrint the cards from array...\n\n");
+//    for (forSuits = 0; forSuits < NUMBER_OF_SUITS; ++forSuits)
+//    {
+//        for (forNum = 1; forNum <= NUMBER_OF_VALUES; ++forNum)
+//        {
+//            if((specialC = isSpecialCard(forNum)) != CARD_NUM)
+//            {
+//                //theDeck.deckOfCards[counter].specialCard = specialC;
+//                //theDeck.deckOfCards[counter].suit = suits[forSuits];
+//                
+//                printf("[%s %c]", theDeck.deckOfCards[counter].suit = suits[forSuits], theDeck.deckOfCards[counter].specialCard = specialC);
+//            } else {
+//                
+//                //theDeck.deckOfCards[counter].number = forNum;
+//                //theDeck.deckOfCards[counter].suit = suits[forSuits];
+//                
+//                printf("[%s %d]", theDeck.deckOfCards[counter].suit = suits[forSuits], theDeck.deckOfCards[counter].number = forNum);
+//            }
+//            
+//            counter++;
+//        }
+//        printf("\n");
+//    }
     
-    printf("\n\nPrint the cards from array...\n\n");
+    return theDeck;
+}
+
+void printDeck(struct deck *point)
+{
+    int forSuits, forNum, counter = 0;
+    char specialC;
+    
+    printf("\n\nPrint the cards...\n\n");
     for (forSuits = 0; forSuits < NUMBER_OF_SUITS; ++forSuits)
     {
         for (forNum = 1; forNum <= NUMBER_OF_VALUES; ++forNum)
         {
             if((specialC = isSpecialCard(forNum)) != CARD_NUM)
             {
-                //theDeck.deckOfCards[counter].specialCard = specialC;
-                //theDeck.deckOfCards[counter].suit = suits[forSuits];
-                
-                printf("[%s %c]", theDeck.deckOfCards[counter].suit = suits[forSuits], theDeck.deckOfCards[counter].specialCard = specialC);
+                //printf("[%s %c]", suits[forSuits], specialC);
+                printf("[%s %c]\n", point->deckOfCards[counter].suit, specialC);
             } else {
-                
-                //theDeck.deckOfCards[counter].number = forNum;
-                //theDeck.deckOfCards[counter].suit = suits[forSuits];
-                
-                printf("[%s %d]", theDeck.deckOfCards[counter].suit = suits[forSuits], theDeck.deckOfCards[counter].number = forNum);
+                //printf("[%s %d]", suits[forSuits], forNum);
+                printf("[%s %c]\n", point->deckOfCards[counter].suit, point->deckOfCards[counter].number);
             }
             
             counter++;
@@ -101,7 +136,6 @@ struct deck createDeck()
         printf("\n");
     }
     
-    return theDeck;
 }
 
 /* isSpecialCard method which will test for the cards that are ACE, JACK, QUEEN,
@@ -121,17 +155,31 @@ char isSpecialCard(int num)
     return CARD_NUM;
 }
 
-/* suffle method which will suffle the deck of cards */
-void suffle(struct deck *card)
+/* shuffle method which will shuffle the deck of cards */
+void shuffle(struct deck *shuff)
 {
-    printf("Suffled");
+    // get position 0 of the deckOfCards and then swap whats in there with
+    // getRandom number
+    
+    int random, i;
+    
+    for(i = 0; i < CARD_TOTAL; ++i)
+    {
+        random = getRandom();
+        struct card tempCard = shuff->deckOfCards[i];
+        
+        //Swap
+        shuff->deckOfCards[i] = shuff->deckOfCards[random];
+        shuff->deckOfCards[random] = tempCard;
+    }
+    
+    printf("Shuffled");
 }
 
 /* getRandom method which will get a random number in order to shuffle the cards */
 int getRandom()
 {
     srand(clock() * CARD_TOTAL + clock());
-    
     return rand() % CARD_TOTAL;
 }
 
