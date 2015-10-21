@@ -39,9 +39,9 @@
 /* Prototypes: */
 
 struct deck createDeck();
-void suffle(struct deck *card);
-void displayHand();
-void sortHand(); /* Extra credit. */
+void shuffle(struct deck *card);
+void printDeck(struct deck *point);
+void sortHand(); /* Extra credit */
 char isSpecialCard (int num);
 int getRandom(); /* Get a random number in order to shuffle the cards */
 
@@ -51,7 +51,7 @@ struct card {
     char *suit;
     int number;
     char specialCard;
-    //int index;
+    int index; /* For extra credit */
 };
 
 struct deck {
