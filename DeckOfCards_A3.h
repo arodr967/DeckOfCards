@@ -23,12 +23,17 @@
 #define CARD_MIN 1 /* Minumum number of cards */
 
 #define ARG_NUM 3 /* Validating that the correct number of arguments passed */
+#define INPUT_CARD 1 /* The first argument inputted by the user which is the number of cards per player */
+#define INPUT_PLAYER 2 /* The second argument inputted by the user which is the number of players */
 
 #define CARD_NUM "N"
 #define CARD_ACE 1
 #define CARD_JACK 11
 #define CARD_QUEEN 12
 #define CARD_KING 13
+
+#define FALSE 0
+#define TRUE 1
 
 /* Unix based codes for the suits */
 #define HEARTS "\xe2\x99\xa5"
