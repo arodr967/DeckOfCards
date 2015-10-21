@@ -38,6 +38,7 @@
 
 /* Prototypes: */
 
+int validateInput(char *arg1, char *arg2);
 struct deck createDeck();
 void shuffle(struct deck *card);
 void printDeck(struct deck *point);
