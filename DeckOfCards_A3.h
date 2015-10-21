@@ -1,9 +1,9 @@
-//
-//  DeckOfCards_A3.h
-//  
-//
-//  Created by Alicia Rodriguez on 10/19/15.
-//
+/*
+ File name: DeckOfCards_A3.h
+ 
+ Description: Header file.
+ 
+ */
 
 #ifndef DeckOfCards_A3_h
 #define DeckOfCards_A3_h
@@ -43,14 +43,17 @@ struct deck createDeck();
 void shuffle(struct deck *card);
 void printDeck(struct deck *point);
 void sortHand(); /* Extra credit */
-char* getCardNumber (int num);
+char* getCardRank(int num);
 int getRandom(); /* Get a random number in order to shuffle the cards */
+void quickSort(int card[], int left, int right);
+void swap(int card[], int i, int j);
+void deal(char *arg1, char *arg2);
 
 /* Structs: */
 
 struct card {
     char *suit;
-    char *number;
+    char *rank;
     int index; /* For extra credit */
 };
 
