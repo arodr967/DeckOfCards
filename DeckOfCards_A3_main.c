@@ -43,22 +43,10 @@ int main(int argc, char *argv[])
             
         }
         
-        //if(argv [1]) //blahblah
-        // enter to create the deck
-//        printf("Initializing the game of cards...\n\n");
-//        
-//        printf("The following is the deck of cards: \n\n");
-//        gameOfCards = createDeck();
-//        printDeck(point);
-//        
-//        printf("Shuffling the deck...\n\n");
-//        shuffle(point);
-//        printDeck(point);
-        
     } else { /* Otherwise, inform the user that they need 2 arguments. */
         printf("Please begin to run the program with 2 arguments. \n");
         printf("The first argument is the number of cards for each player,\n");
-        printf("and the second is the number of cards.\n\n");
+        printf("and the second is the number of players.\n\n");
     }
     
     return 0;
