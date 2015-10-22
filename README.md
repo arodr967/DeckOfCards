@@ -33,4 +33,4 @@ _numberOfPlayers_ = the number of players
 _EXAMPLE_: __./a.out 4 12__
 
 
-__NOTE__: When program has been successfully executed, the suits will display as their corresponding letter, eg. HEART = H, SPADE= S, CLUB = C, DIAMOND = D.
+__NOTE__: When program has been successfully executed, the suits will display as their corresponding letter, eg. HEART = H, SPADE= S, CLUB = C, DIAMOND = D. However, if ran on __OCELOT.AUL.FIU.EDU__, it will display the symbols.
