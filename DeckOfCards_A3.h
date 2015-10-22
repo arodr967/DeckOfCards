@@ -17,13 +17,13 @@
 #define NUMBER_OF_SUITS 4
 
 #define PLAYER_MAX 13 /* Maximum number of players */
-#define PLAYER_MIN 1 /* Minumum number of players */
+#define PLAYER_MIN 1 /* Minimum number of players */
 
 #define CARD_MAX 13 /* Maximum number of cards */
-#define CARD_MIN 1 /* Minumum number of cards */
+#define CARD_MIN 1 /* Minimum number of cards */
 
 #define ARG_NUM 3 /* Validating that the correct number of arguments passed */
-#define INPUT_CARD 1 /* The first argument inputted by the user which is the number of cards per player */
+#define INPUT_CARD 1 /* The first argument inputied by the user which is the number of cards per player */
 #define INPUT_PLAYER 2 /* The second argument inputted by the user which is the number of players */
 
 #define CARD_NUM "N"
@@ -35,25 +35,17 @@
 #define FALSE 0
 #define TRUE 1
 
-/* Codes for the suits */
-#if defined(_WIN32) || defined(_MSDOS_)
+/* Display corresponding letter for each suit */
 #define SPADE	"S"
 #define CLUB	"C"
 #define HEART	"H"
 #define DIAMOND	"D"
-#else
-#define SPADE	"\xe2\x99\xa4"
-#define CLUB	"\xe2\x99\xa7"
-#define HEART	"\xe2\x99\xa5"
-#define DIAMOND	"\xe2\x99\xa6"
-#endif
 
-/* Structs: */
+/* Structures: */
 
 struct card {
     char *suit;
     char *rank;
-    int index; /* For extra credit */
 };
 
 struct deck {
@@ -68,8 +60,6 @@ void shuffle(struct deck *shuff);
 void printDeck(struct deck *point);
 char* getCardRank(int num);
 int getRandom(); /* Get a random number in order to shuffle the cards */
-void quickSort(struct deck *players, int left, int right);
-void swap(struct deck *players, int i, int j);
 void deal(int numberOfCards, int numberOfPlayers);
 void printHands(int numberOfCards, int numberOfPlayers, struct deck *players);
 
