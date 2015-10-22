@@ -25,6 +25,7 @@ Please use the following to execute the program successfully:
 __./a.out numberOfCards numberOfPlayers__
 
 _numberOfCards_ = the number of cards each player should have
+
 _numberOfPlayers_ = the number of players
 
 
