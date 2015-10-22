@@ -167,6 +167,10 @@ void deal(int numberOfCards, int numberOfPlayers)
                 printf("[%s %2s] ", players[j]->suit, players[j]->rank);
                 // sort the hands here and display again
                 
+//                quickSort(*players, 0, numberOfPlayers-1);
+//                
+//                printf("[%s %2s] ", players[j]->suit, players[j]->rank);
+                
                 currentCard++;
             }
         } else { /* Otherwise, the number of cards is 1. */
@@ -181,29 +185,7 @@ void deal(int numberOfCards, int numberOfPlayers)
         printf("\n");
     }
     printf("\n");
-    //printHand(numberOfCards, numberOfPlayers, *players);
 }
-
-//void printHand(int numberOfCards, int numberOfPlayers, struct card *players)
-//{
-//    int i, j, currentCard = 0, currentPlayer = 1;
-//
-//    for(i = 0; i < numberOfPlayers; ++i)
-//    {
-//        printf("Player %d has card(s): \n", currentPlayer);
-//        
-//            for (j = 0; j < numberOfCards; ++j)
-//            {
-//                printf("[%s %2s] ", players[currentCard].suit, players[currentCard].rank);
-//                currentCard++;
-//            }
-//
-//        currentPlayer++;
-//        printf("\n");
-//    }
-//    
-//    printf("\n");
-//}
 
 /* getRandom method which will get a random number in order to shuffle the cards */
 int getRandom()
@@ -219,39 +201,38 @@ void sortHand()
 }
 
 /* quickSort recursive function to sort the hands. */
-void quickSort(int card[], int left, int right)
-{
-    int i, last;
-    void swap(int card[], int i, int j);
-    
-    if (left >= right) /* If the array contains fewer than 2 elements,
-                        then just return the function as it is and do nothing. */
-    {
-        return;
-    }
-    
-    swap(card, left, ((left + right)/2)); /* Move partition element to card[0] */
-    last = left;
-    
-    for (i = left+1; i <= right; i++) /* Partition */
-    {
-        if (card[i] < card[left])
-        {
-            swap(card, ++last, i);
-        }
-    }
-    
-    swap(card, left, last);     /* Restore the partitioned element */
-    quickSort(card, left, last-1);
-    quickSort(card, last+1, right);
-}
+//void quickSort(struct deck *players, int left, int right)
+//{
+//    int i, last;
+//    void swap(struct deck *players, int i, int j);
+//    
+//    if (left >= right) /* If the array contains fewer than 2 elements,
+//                        then just return the function as it is and do nothing. */
+//    {
+//        return;
+//    }
+//    
+//    swap(players, left, ((left + right)/2)); /* Move partition element to card[0] */
+//    last = left;
+//    
+//    for (i = left+1; i <= right; i++) /* Partition */
+//    {
+//        if (players->deckOfCards[i] < players->deckOfCards[left])
+//        {
+//            swap(players, ++last, i);
+//        }
+//    }
+//    
+//    swap(players, left, last);     /* Restore the partitioned element */
+//    quickSort(players, left, last-1);
+//    quickSort(players, last+1, right);
+//}
 
 /* swap function for the quickSort function. */
-void swap(int card[], int i, int j)
-{
-    int temp;
-    
-    temp = card[i];
-    card[i] = card[j];
-    card[j] = temp;
-}
+//void swap(struct deck *players, int i, int j)
+//{
+//    struct deck temp = players->deckOfCards[i];
+//    
+//    players->deckOfCards[i] = players->deckOfCards[j];
+//    players->deckOfCards[j] = temp;
+//}
