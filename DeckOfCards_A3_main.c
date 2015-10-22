@@ -5,8 +5,6 @@
  and none of it is the work of any other person or entity.
  
  Created by Alicia Rodriguez.
- Panther ID: 5162522
- Due date: 10/22/15 @ 6:25PM
  
  Description: The main function file which prompts the user for the number
  of cards and hands (players) and checks if the input is valid; otherwise, repeat.
