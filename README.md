@@ -1,4 +1,4 @@
-# DeckOfCards #
+# Deck Of Cards #
 Program in C.
 
 _"A simulation of a deck of cards in preparation for a game of cards."_
