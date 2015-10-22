@@ -10,11 +10,8 @@
 /* validateInput function which will validate the user's input and make sure that
  it is valide by calculating the total number of cards from the inputs and making
  sure that there are enough cards to play the game. */
-int validateInput(char *arg1, char *arg2)
+int validateInput(int numberOfCards, int numberOfPlayers)
 {
-    int numberOfCards = atoi(arg1);
-    int numberOfPlayers = atoi(arg2);
-    
     int total = numberOfCards * numberOfPlayers;
     
     printf("Number of cards per player: %d and number of players: %d\n\n", numberOfCards, numberOfPlayers);
@@ -44,7 +41,7 @@ int validateInput(char *arg1, char *arg2)
 struct deck createDeck()
 {
     /* Create an array of char pointers to the Unix suits. */
-    char *suits[NUMBER_OF_SUITS] = {HEARTS, SPADES, CLOVERS, DIAMONDS};
+    char *suits[NUMBER_OF_SUITS] = {SPADE, CLUB, HEART, DIAMOND};
     
     int forSuits, forNum, counter = 0;
     struct deck theDeck;
@@ -140,54 +137,73 @@ void shuffle(struct deck *shuff)
     
 }
 
-/* deal function which accepts the 2 arguments passed by the command-line.
- IDEA: Create an array of players, player[0] is player 1, and in there, is where they
- should have their own cards */
-void deal(char *arg1, char *arg2)
+/* deal function which accepts the 2 arguments passed by the command-line, already converted
+ to int, and then deal and display the cards. */
+void deal(int numberOfCards, int numberOfPlayers)
 {
-    int numberOfCards = atoi(arg1);
-    int numberOfPlayers = atoi(arg2);
     int i, j, currentCard = 0, currentPlayer = 1;
-    //struct deck *players[numberOfPlayers];
     
-    /* To differentiate between one card and more than one card */
-    if (numberOfCards > 1) {
-        printf("\n\nReady to deal %d cards to %d players...\n\n", numberOfCards, numberOfPlayers);
-    } else {
-        printf("\n\nReady to deal %d card to %d players...\n\n", numberOfCards, numberOfPlayers);
-    }
-    
+    printf("\n\nReady to deal %d card(s) to %d player(s)...\n\n", numberOfCards, numberOfPlayers);
+
     struct deck cardDeck, *point = &cardDeck;
-    cardDeck = createDeck(); /* Create the playerDeck with all cards */
-    shuffle(point); /* Shuffle all of the cards in the playerDeck */
+    cardDeck = createDeck(); /* Create the cardDeck with all cards */
     
+    shuffle(point);
     printDeck(point);
-    printf("\n\n");
     
     struct card *players[numberOfPlayers];
     
+    printf("\n");
+    
     for(i = 0; i < numberOfPlayers; ++i)
     {
+        printf("Player %d has card(s): \n", currentPlayer);
         if (numberOfCards > 1) /* If numberOfCards is greater than 1 then we must display
                                 all of the cards the players have */
         {
             for (j = 0; j < numberOfCards; ++j)
             {
                 players[j] = &cardDeck.deckOfCards[currentCard];
-                printf("Player %d has [%s %2s] card.\n", currentPlayer, players[j]->suit, players[j]->rank);
+                printf("[%s %2s] ", players[j]->suit, players[j]->rank);
                 // sort the hands here and display again
+                
                 currentCard++;
             }
         } else { /* Otherwise, the number of cards is 1. */
             
             players[i] = &cardDeck.deckOfCards[currentCard];
-            printf("Player %d has [%s %2s] card.\n", currentPlayer, players[i]->suit, players[i]->rank);
+            printf("[%s %2s] ", players[i]->suit, players[i]->rank);
             // sort the hands here and display again
+            
             currentCard++;
         }
         currentPlayer++;
+        printf("\n");
     }
+    printf("\n");
+    //printHand(numberOfCards, numberOfPlayers, *players);
 }
+
+//void printHand(int numberOfCards, int numberOfPlayers, struct card *players)
+//{
+//    int i, j, currentCard = 0, currentPlayer = 1;
+//
+//    for(i = 0; i < numberOfPlayers; ++i)
+//    {
+//        printf("Player %d has card(s): \n", currentPlayer);
+//        
+//            for (j = 0; j < numberOfCards; ++j)
+//            {
+//                printf("[%s %2s] ", players[currentCard].suit, players[currentCard].rank);
+//                currentCard++;
+//            }
+//
+//        currentPlayer++;
+//        printf("\n");
+//    }
+//    
+//    printf("\n");
+//}
 
 /* getRandom method which will get a random number in order to shuffle the cards */
 int getRandom()

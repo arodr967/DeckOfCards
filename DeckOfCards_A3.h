@@ -69,9 +69,9 @@ void printDeck(struct deck *point);
 void sortHand(); /* Extra credit */
 char* getCardRank(int num);
 int getRandom(); /* Get a random number in order to shuffle the cards */
-//void quickSort(int card[], int left, int right);
-//void swap(int card[], int i, int j);
-void deal(int numberOfCards, int numberOfPlayers, struct deck *point);
-void printHand(int numberOfCards, int numberOfPlayers, struct card *players);
+void quickSort(int card[], int left, int right);
+void swap(int card[], int i, int j);
+void deal(int numberOfCards, int numberOfPlayers);
+//void printHand(int numberOfCards, int numberOfPlayers, struct card *players);
 
 #endif /* DeckOfCards_A3_h */

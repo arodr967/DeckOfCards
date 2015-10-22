@@ -20,10 +20,16 @@ int main(int argc, char *argv[])
 {
     struct deck gameOfCards, *point = &gameOfCards; /* Create a deck and a pointer
                                                      to the address of the deck */
+    
+    int numberOfCards, numberOfPlayers;
+    
     if(argc == ARG_NUM)     /* There will only be 3 accepted arguments in this 
                              deck of cards */
     {
-        if(validateInput(argv[INPUT_CARD], argv[INPUT_PLAYER])) /* If the validateInput function returns
+        numberOfCards = atoi(argv[INPUT_CARD]);
+        numberOfPlayers = atoi(argv[INPUT_PLAYER]);
+        
+        if(validateInput(numberOfCards, numberOfPlayers)) /* If the validateInput function returns
                                                a 1 then the inputs were correct and the 
                                                game of cards can begin */
         {
@@ -33,7 +39,8 @@ int main(int argc, char *argv[])
             gameOfCards = createDeck();
             printDeck(point);
             
-            deal(argv[INPUT_CARD], argv[INPUT_PLAYER]);
+            deal(numberOfCards, numberOfPlayers);
+            
         }
         
         //if(argv [1]) //blahblah
