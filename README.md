@@ -13,7 +13,9 @@ __Input__: Accept input via the command-line arguments and validate.
 
 __Output__: Generate a display of a deck of cards and of the cards that each player has.
 
-### How to compile and link files for execution: ###
+--------
+
+### How to compile and link files for execution ###
 
 
 Please use the following to compile (this will work on any OS:
