@@ -14,8 +14,8 @@ int validateInput(int numberOfCards, int numberOfPlayers)
 {
     int total = numberOfCards * numberOfPlayers;
     
-    printf("Number of cards per player: %d and number of players: %d\n\n", numberOfCards, numberOfPlayers);
-    printf("The total number of cards is %d\n\n", total);
+    printf("\n\nNumber of cards per player: %d and number of players: %d\n\n", numberOfCards, numberOfPlayers);
+    printf("The total number of card(s) is %d.\n\n", total);
     
     if (((total > CARD_TOTAL) || (total == 0)))
     {
@@ -24,12 +24,12 @@ int validateInput(int numberOfCards, int numberOfPlayers)
     }
     else if ((numberOfPlayers < PLAYER_MIN) || (numberOfPlayers > PLAYER_MAX))
     {
-        printf("There can only be a minimum of %d players and a maximum of %d players. Please try again.\n\n", PLAYER_MIN, PLAYER_MAX);
+        printf("There can only be a minimum of %d player(s) and a maximum of %d players. Please try again.\n\n", PLAYER_MIN, PLAYER_MAX);
         return FALSE; //invalid input
     }
     else if ((numberOfCards < CARD_MIN) || (numberOfCards > CARD_MAX))
     {
-        printf("There can only be a minimum of %d card and a maximum of %d cards. Please try again.\n\n", CARD_MIN, CARD_MAX);
+        printf("There can only be a minimum of %d card(s) and a maximum of %d cards. Please try again.\n\n", CARD_MIN, CARD_MAX);
         return FALSE; //invalid input
     } else {
         printf("Your input is valid.\n\n");
@@ -46,12 +46,15 @@ struct deck createDeck()
     int forSuits, forNum, counter = 0;
     struct deck theDeck;
     
+    //theDeck.deckOfCards[CARD_TOTAL].index[CARD_TOTAL];
+    
     for (forSuits = 0; forSuits < NUMBER_OF_SUITS; ++forSuits)
     {
         for (forNum = 1; forNum <= NUMBER_OF_VALUES; ++forNum)
         {
             theDeck.deckOfCards[counter].suit = suits[forSuits];
             theDeck.deckOfCards[counter].rank = getCardRank(forNum);
+            //theDeck.deckOfCards[counter].index = counter;
             
             counter++;
         }
@@ -114,12 +117,9 @@ char* getCardRank(int num)
     }
 }
 
-/* shuffle method which will shuffle the deck of cards */
+/* shuffle function which will shuffle the deck of cards */
 void shuffle(struct deck *shuff)
 {
-    // get position 0 of the deckOfCards and then swap whats in there with
-    // getRandom number
-    
     int random, i;
     
     for(i = 0; i < CARD_TOTAL; ++i)
@@ -137,11 +137,13 @@ void shuffle(struct deck *shuff)
     
 }
 
-/* deal function which accepts the 2 arguments passed by the command-line, already converted
- to int, and then deal and display the cards. */
+/* deal function which accepts the 2 arguments passed by the command-line, 
+ already converted to int, create a new deck, shuffle the deck, print the deck, then deal and display the cards that each player has. */
 void deal(int numberOfCards, int numberOfPlayers)
 {
-    int i, j, currentCard = 0, currentPlayer = 1;
+    
+    
+    int forPlayer, forCard, currentCard = 0;
     
     printf("\n\nReady to deal %d card(s) to %d player(s)...\n\n", numberOfCards, numberOfPlayers);
 
@@ -151,35 +153,56 @@ void deal(int numberOfCards, int numberOfPlayers)
     shuffle(point);
     printDeck(point);
     
-    struct card *players[numberOfPlayers];
+    struct card players[numberOfPlayers];
+    struct card *playersPoint;
+    
+    playersPoint = players;
     
     printf("\n");
     
-    for(i = 0; i < numberOfPlayers; ++i)
+    for(forPlayer = 0; forPlayer < numberOfPlayers; ++forPlayer)
     {
-        printf("Player %d has card(s): \n", currentPlayer);
-        if (numberOfCards > 1) /* If numberOfCards is greater than 1 then we must display
-                                all of the cards the players have */
+        if (numberOfCards > 1) /* If numberOfCards is greater than 1 then we must
+                                display all of the cards the players have */
         {
-            for (j = 0; j < numberOfCards; ++j)
+            for (forCard = 0; forCard < numberOfCards; ++forCard)
             {
-                players[j] = &cardDeck.deckOfCards[currentCard];
-                printf("[%s %2s] ", players[j]->suit, players[j]->rank);
-                // sort the hands here and display again
-                
-//                quickSort(*players, 0, numberOfPlayers-1);
-//                
-//                printf("[%s %2s] ", players[j]->suit, players[j]->rank);
+                playersPoint[forCard] = cardDeck.deckOfCards[currentCard];
                 
                 currentCard++;
             }
         } else { /* Otherwise, the number of cards is 1. */
             
-            players[i] = &cardDeck.deckOfCards[currentCard];
-            printf("[%s %2s] ", players[i]->suit, players[i]->rank);
-            // sort the hands here and display again
+            playersPoint[forPlayer] = cardDeck.deckOfCards[currentCard];
             
             currentCard++;
+        }
+    }
+    
+    printf("\n");
+    
+    printHands(numberOfCards, numberOfPlayers, point);
+    quickSort(point, 0, numberOfCards);
+    printHands(numberOfCards, numberOfPlayers, point);
+    
+}
+
+/* printHands function which prints the values  */
+void printHands(int numberOfCards, int numberOfPlayers, struct deck *players)
+{
+    int forPlayer, forCard, currentPlayer = 1, counter = 0;
+    
+    printf("Ready to print the hands...\n");
+    
+    for(forPlayer = 0; forPlayer < numberOfPlayers; ++forPlayer)
+    {
+        printf("\nPlayer %d has card(s): \n", currentPlayer);
+        
+        for(forCard = 1; forCard <= numberOfCards; ++forCard)
+        {
+            printf("[%s %2s] ", players->deckOfCards[counter].suit, players->deckOfCards[counter].rank);
+            counter++;
+            
         }
         currentPlayer++;
         printf("\n");
@@ -194,45 +217,40 @@ int getRandom()
     return rand() % CARD_TOTAL;
 }
 
-/* sortHand function which sorts the cards that each player has by rank. */
-void sortHand()
+/* quickSort recursive function to sort the hands. */
+void quickSort(struct deck *players, int left, int right)
 {
-    printf("Sorted");
+    
+    int i, last;
+    void swap(struct deck *players, int i, int j);
+    
+    if (left >= right) /* If the array contains fewer than 2 elements,
+                        then just return the function as it is and do nothing. */
+    {
+        return;
+    }
+    
+    swap(players, left, ((left + right)/2)); /* Move partition element to card[0] */
+    last = left;
+    
+    for (i = left+1; i <= right; i++) /* Partition */
+    {
+        if (players->&deckOfCards[i] < players->&deckOfCards[left])
+        {
+            swap(players, ++last, i);
+        }
+    }
+    
+    swap(players, left, last);     /* Restore the partitioned element */
+    quickSort(players, left, last-1);
+    quickSort(players, last+1, right);
 }
 
-/* quickSort recursive function to sort the hands. */
-//void quickSort(struct deck *players, int left, int right)
-//{
-//    int i, last;
-//    void swap(struct deck *players, int i, int j);
-//    
-//    if (left >= right) /* If the array contains fewer than 2 elements,
-//                        then just return the function as it is and do nothing. */
-//    {
-//        return;
-//    }
-//    
-//    swap(players, left, ((left + right)/2)); /* Move partition element to card[0] */
-//    last = left;
-//    
-//    for (i = left+1; i <= right; i++) /* Partition */
-//    {
-//        if (players->deckOfCards[i] < players->deckOfCards[left])
-//        {
-//            swap(players, ++last, i);
-//        }
-//    }
-//    
-//    swap(players, left, last);     /* Restore the partitioned element */
-//    quickSort(players, left, last-1);
-//    quickSort(players, last+1, right);
-//}
-
 /* swap function for the quickSort function. */
-//void swap(struct deck *players, int i, int j)
-//{
-//    struct deck temp = players->deckOfCards[i];
-//    
-//    players->deckOfCards[i] = players->deckOfCards[j];
-//    players->deckOfCards[j] = temp;
-//}
+void swap(struct deck *players, int i, int j)
+{
+    struct deck tempCard = players->deckOfCards[i];
+    
+    players->deckOfCards[i] = players->deckOfCards[j];
+    players->deckOfCards[j] = tempCard;
+}
