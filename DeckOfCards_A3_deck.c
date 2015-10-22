@@ -182,8 +182,6 @@ void deal(int numberOfCards, int numberOfPlayers)
     printf("\n");
     
     printHands(numberOfCards, numberOfPlayers, point);
-    quickSort(point, 0, numberOfCards);
-    printHands(numberOfCards, numberOfPlayers, point);
     
 }
 
@@ -215,42 +213,4 @@ int getRandom()
 {
     srand(clock() * CARD_TOTAL + clock());
     return rand() % CARD_TOTAL;
-}
-
-/* quickSort recursive function to sort the hands. */
-void quickSort(struct deck *players, int left, int right)
-{
-    
-    int i, last;
-    void swap(struct deck *players, int i, int j);
-    
-    if (left >= right) /* If the array contains fewer than 2 elements,
-                        then just return the function as it is and do nothing. */
-    {
-        return;
-    }
-    
-    swap(players, left, ((left + right)/2)); /* Move partition element to card[0] */
-    last = left;
-    
-    for (i = left+1; i <= right; i++) /* Partition */
-    {
-        if (players->&deckOfCards[i] < players->&deckOfCards[left])
-        {
-            swap(players, ++last, i);
-        }
-    }
-    
-    swap(players, left, last);     /* Restore the partitioned element */
-    quickSort(players, left, last-1);
-    quickSort(players, last+1, right);
-}
-
-/* swap function for the quickSort function. */
-void swap(struct deck *players, int i, int j)
-{
-    struct deck tempCard = players->deckOfCards[i];
-    
-    players->deckOfCards[i] = players->deckOfCards[j];
-    players->deckOfCards[j] = tempCard;
 }
