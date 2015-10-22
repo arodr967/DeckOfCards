@@ -28,5 +28,7 @@ _numberOfCards_ = the number of cards each player should have
 
 _numberOfPlayers_ = the number of players
 
+EXAMPLE: __./a.out 4 12__
+
 
 __NOTE__: When program has been successfully executed, when running on __Linux__ or __Ubuntu__, the suits will display as their corresponding letter, eg. HEART = H, SPADE= S, CLUB = C, DIAMOND = D. However, if program has been successfully executed, when running on __OS X__, the suits will display their corresponding image.
