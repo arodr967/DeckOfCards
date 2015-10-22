@@ -1,7 +1,7 @@
 /*
  File name: DeckOfCards_A3.h
  
- Description: Header file.
+ Description: Header file which contains all of the constants, libraries, structures, and prototypes.
  
  */
 
@@ -17,7 +17,7 @@
 #define NUMBER_OF_SUITS 4
 
 #define PLAYER_MAX 13 /* Maximum number of players */
-#define PLAYER_MIN 2 /* Minumum number of players */
+#define PLAYER_MIN 1 /* Minumum number of players */
 
 #define CARD_MAX 13 /* Maximum number of cards */
 #define CARD_MIN 1 /* Minumum number of cards */
@@ -37,10 +37,10 @@
 
 /* Codes for the suits */
 #if defined(_WIN32) || defined(_MSDOS_)
-#define SPADE	"\x06"
-#define CLUB	"\x05"
-#define HEART	"\x03"
-#define DIAMOND	"\x04"
+#define SPADE	"S"
+#define CLUB	"C"
+#define HEART	"H"
+#define DIAMOND	"D"
 #else
 #define SPADE	"\xe2\x99\xa4"
 #define CLUB	"\xe2\x99\xa7"
@@ -53,7 +53,7 @@
 struct card {
     char *suit;
     char *rank;
-    //int index; /* For extra credit */
+    int index; /* For extra credit */
 };
 
 struct deck {
@@ -66,11 +66,11 @@ int validateInput(int numberOfCards, int numberOfPlayers);
 struct deck createDeck();
 void shuffle(struct deck *shuff);
 void printDeck(struct deck *point);
-void sortHand(); /* Extra credit */
 char* getCardRank(int num);
 int getRandom(); /* Get a random number in order to shuffle the cards */
-//void quickSort(struct deck *players, int left, int right);
-//void swap(struct deck *players, int i, int j);
+void quickSort(struct deck *players, int left, int right);
+void swap(struct deck *players, int i, int j);
 void deal(int numberOfCards, int numberOfPlayers);
+void printHands(int numberOfCards, int numberOfPlayers, struct deck *players);
 
 #endif /* DeckOfCards_A3_h */
