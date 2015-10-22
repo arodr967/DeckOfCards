@@ -48,29 +48,30 @@
 #define DIAMOND	"\xe2\x99\xa6"
 #endif
 
-/* Prototypes: */
-
-int validateInput(char *arg1, char *arg2);
-struct deck createDeck();
-void shuffle(struct deck *card);
-void printDeck(struct deck *point);
-void sortHand(); /* Extra credit */
-char* getCardRank(int num);
-int getRandom(); /* Get a random number in order to shuffle the cards */
-void quickSort(int card[], int left, int right);
-void swap(int card[], int i, int j);
-void deal(char *arg1, char *arg2);
-
 /* Structs: */
 
 struct card {
     char *suit;
     char *rank;
-    int index; /* For extra credit */
+    //int index; /* For extra credit */
 };
 
 struct deck {
     struct card deckOfCards[CARD_TOTAL];
 };
+
+/* Prototypes: */
+
+int validateInput(int numberOfCards, int numberOfPlayers);
+struct deck createDeck();
+void shuffle(struct deck *shuff);
+void printDeck(struct deck *point);
+void sortHand(); /* Extra credit */
+char* getCardRank(int num);
+int getRandom(); /* Get a random number in order to shuffle the cards */
+//void quickSort(int card[], int left, int right);
+//void swap(int card[], int i, int j);
+void deal(int numberOfCards, int numberOfPlayers, struct deck *point);
+void printHand(int numberOfCards, int numberOfPlayers, struct card *players);
 
 #endif /* DeckOfCards_A3_h */
